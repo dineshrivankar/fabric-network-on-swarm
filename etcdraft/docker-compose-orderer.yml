@@ -1,0 +1,198 @@
+version: '3.3'
+networks:
+    myNetwork:
+        external:
+            name: myNetwork
+services:
+    orderer:
+        deploy:
+            replicas: 1
+            restart_policy: 
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement: 
+                constraints: 
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-orderer:latest
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+        command: orderer
+        hostname: orderer.example.com
+        environment:
+            - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+            - ORDERER_GENERAL_GENESISMETHOD=file
+            - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/config/genesis.block
+            - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+            - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/msp
+            - ORDERER_GENERAL_TLS_ENABLED=true
+            - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/tls/ca.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/tls/ca.crt]
+        ports:
+            - 7050:7050
+        volumes:
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/users:/var/hyperledger/users
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/msp
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls:/var/hyperledger/tls
+            - /var/mynetwork/certs/config/:/var/hyperledger/config
+        networks:
+            myNetwork: 
+                aliases: 
+                    - orderer.example.com
+    orderer2:
+        deploy:
+            replicas: 1
+            restart_policy: 
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement: 
+                constraints: 
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-orderer:latest
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+        command: orderer
+        hostname: orderer2.example.com
+        environment:
+            - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+            - ORDERER_GENERAL_GENESISMETHOD=file
+            - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/config/genesis.block
+            - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+            - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/msp
+            - ORDERER_GENERAL_TLS_ENABLED=true
+            - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/tls/ca.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/tls/ca.crt]
+
+        ports:
+            - 8050:7050
+        volumes:
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/users:/var/hyperledger/users
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/msp:/var/hyperledger/msp
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer2.example.com/tls:/var/hyperledger/tls
+            - /var/mynetwork/certs/config/:/var/hyperledger/config
+        networks:
+            myNetwork: 
+                aliases: 
+                    - orderer2.example.com
+    orderer3:
+        deploy:
+            replicas: 1
+            restart_policy: 
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement: 
+                constraints: 
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-orderer:latest
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+        command: orderer
+        hostname: orderer3.example.com
+        environment:
+            - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+            - ORDERER_GENERAL_GENESISMETHOD=file
+            - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/config/genesis.block
+            - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+            - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/msp
+            - ORDERER_GENERAL_TLS_ENABLED=true
+            - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/tls/ca.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/tls/ca.crt]
+
+        ports:
+            - 9050:7050
+        volumes:
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/users:/var/hyperledger/users
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/msp:/var/hyperledger/msp
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer3.example.com/tls:/var/hyperledger/tls
+            - /var/mynetwork/certs/config/:/var/hyperledger/config
+        networks:
+            myNetwork: 
+                aliases: 
+                    - orderer3.example.com 
+    orderer4:
+        deploy:
+            replicas: 1
+            restart_policy: 
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement: 
+                constraints: 
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-orderer:latest
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+        command: orderer
+        hostname: orderer4.example.com
+        environment:
+            - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+            - ORDERER_GENERAL_GENESISMETHOD=file
+            - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/config/genesis.block
+            - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+            - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/msp
+            - ORDERER_GENERAL_TLS_ENABLED=true
+            - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/tls/ca.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/tls/ca.crt]
+        ports:
+            - 10050:7050
+        volumes:
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/users:/var/hyperledger/users
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer4.example.com/msp:/var/hyperledger/msp
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer4.example.com/tls:/var/hyperledger/tls
+            - /var/mynetwork/certs/config/:/var/hyperledger/config
+        networks:
+            myNetwork: 
+                aliases: 
+                    - orderer4.example.com
+    orderer5:
+        deploy:
+            replicas: 1
+            restart_policy: 
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement: 
+                constraints: 
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-orderer:latest
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+        command: orderer
+        hostname: orderer5.example.com
+        environment:
+            - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+            - ORDERER_GENERAL_GENESISMETHOD=file
+            - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/config/genesis.block
+            - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+            - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/msp
+            - ORDERER_GENERAL_TLS_ENABLED=true
+            - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/tls/ca.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/tls/server.crt
+            - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/tls/server.key
+            - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/tls/ca.crt]
+        ports:
+            - 11050:7050
+        volumes:
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/users:/var/hyperledger/users
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer5.example.com/msp:/var/hyperledger/msp
+            - /var/mynetwork/certs/crypto-config/ordererOrganizations/example.com/orderers/orderer5.example.com/tls:/var/hyperledger/tls
+            - /var/mynetwork/certs/config/:/var/hyperledger/config
+        networks:
+            myNetwork: 
+                aliases: 
+                    - orderer5.example.com

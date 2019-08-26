@@ -1,0 +1,68 @@
+version: '3.3'
+networks:
+    myNetwork:
+        external:
+            name: myNetwork
+services:
+    zookeeper:
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement:
+                constraints:
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-zookeeper
+        hostname: zookeeper.example.com
+        environment:
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=myNetwork
+            - ZOO_MY_ID=1
+            - ZOO_SERVERS=server.1=zookeeper.example.com:2888:3888 server.2=zookeeper2.example.com:2888:3888 server.3=zookeeper3.example.com:2888:3888
+        networks:
+            myNetwork: 
+                aliases:
+                    - zookeeper.example.com
+
+    zookeeper2:
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement:
+                constraints:
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-zookeeper
+        hostname: zookeeper2.example.com
+        environment:
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=myNetwork
+            - ZOO_MY_ID=2
+            - ZOO_SERVERS=server.1=zookeeper.example.com:2888:3888 server.2=zookeeper2.example.com:2888:3888 server.3=zookeeper3.example.com:2888:3888
+        networks:
+            myNetwork: 
+                aliases:
+                    - zookeeper2.example.com
+ 
+    zookeeper3:
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 3
+            placement:
+                constraints:
+                    - node.hostname == pt-corcto17937
+        image: hyperledger/fabric-zookeeper
+        hostname: zookeeper3.example.com
+        environment:
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=myNetwork
+            - ZOO_MY_ID=3
+            - ZOO_SERVERS=server.1=zookeeper.example.com:2888:3888 server.2=zookeeper2.example.com:2888:3888 server.3=zookeeper3.example.com:2888:3888
+        networks:
+            myNetwork: 
+                aliases:
+                    - zookeeper3.example.com
