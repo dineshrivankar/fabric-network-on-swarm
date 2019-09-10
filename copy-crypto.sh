@@ -26,7 +26,7 @@ git checkout release-1.4
 
 echo 
 echo "# ---------------------------------------------------------------------------"
-echo "# Copy new old crypto material"
+echo "# Copy new crypto material"
 echo "# ---------------------------------------------------------------------------"
 cd -
 cp -R crypto-config /var/mynetwork/certs/
