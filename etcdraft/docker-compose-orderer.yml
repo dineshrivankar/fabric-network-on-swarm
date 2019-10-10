@@ -13,7 +13,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == orderer.example.com
         image: hyperledger/fabric-orderer:latest
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer
@@ -51,7 +51,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == orderer2.example.com
         image: hyperledger/fabric-orderer:latest
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer
@@ -90,7 +90,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == orderer3.example.com
         image: hyperledger/fabric-orderer:latest
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer
@@ -129,7 +129,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == orderer4.example.com
         image: hyperledger/fabric-orderer:latest
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer
@@ -167,7 +167,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == orderer5.example.com
         image: hyperledger/fabric-orderer:latest
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer

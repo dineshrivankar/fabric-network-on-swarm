@@ -13,7 +13,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17927
+                    - node.hostname == peer0.org2.example.com
         image: hyperledger/fabric-peer:latest
         hostname: peer0.org2.example.com
         environment:
@@ -61,7 +61,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == pt-corcto17927
+                    - node.hostname == peer1.org2.example.com
         image: hyperledger/fabric-peer:latest
         hostname: peer1.org2.example.com
         environment:
@@ -79,6 +79,7 @@ services:
             - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt
             - CORE_PEER_TLS_KEY_FILE=/var/hyperledger/tls/server.key
             - CORE_PEER_TLS_ROOTCERT_FILE=/var/hyperledger/tls/ca.crt
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org2.example.com:7052
             - CORE_PEER_ID=peer1.org2.example.com
             - CORE_PEER_ADDRESS=peer1.org2.example.com:7051
             - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.example.com:7051

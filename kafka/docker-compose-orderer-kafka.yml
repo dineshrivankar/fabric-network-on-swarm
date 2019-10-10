@@ -13,7 +13,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == kafka.example.com
         hostname: kafka.example.com
         image: hyperledger/fabric-kafka
         environment:
@@ -41,7 +41,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == kafka2.example.com
         hostname: kafka2.example.com
         image: hyperledger/fabric-kafka
         environment:
@@ -69,7 +69,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == kafka3.example.com
         hostname: kafka3.example.com
         image: hyperledger/fabric-kafka
         environment:
@@ -97,7 +97,7 @@ services:
                 max_attempts: 3
             placement:
                 constraints:
-                    - node.hostname == pt-corcto17937
+                    - node.hostname == kafka4.example.com
         hostname: kafka4.example.com
         image: hyperledger/fabric-kafka
         environment:
